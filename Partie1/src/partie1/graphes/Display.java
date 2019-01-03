@@ -1,4 +1,4 @@
-package graphes;
+package partie1.graphes;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package graphes;
+package partie1.graphes;
 
 class Edge
 {
