@@ -121,5 +121,6 @@ public class Test{
 	printLaby(G,size, "toto.tex");
 	
 	
+	
     }
 } 
