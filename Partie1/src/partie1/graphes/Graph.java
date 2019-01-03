@@ -1,26 +1,36 @@
 package partie1.graphes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.io.*;
 import javax.swing.*;
+
+import partie1.kruskal.Kruskal;
+
 import java.awt.*;
 import java.awt.image.*;
 
-class Graph{
+public class Graph{
    private ArrayList<Edge>[] adj;
    private int[] coordX;
    private int[] coordY;
    private final int V;
+   protected HashMap<Integer,Integer> tabParent;
    private int E;
 
    @SuppressWarnings("unchecked")
    public Graph(int N)
          {
+	   this.tabParent = new HashMap<>();
 	     this.V = N;
 	     this.E = 0;
 	     adj = (ArrayList<Edge>[]) new ArrayList[N];
-	     for (int v= 0; v < N; v++)
-		 adj[v] = new ArrayList<Edge>();
+	     for (int v= 0; v < N; v++){
+		     tabParent.put(v, v);// on associe le parent qui est lui meme
+			 adj[v] = new ArrayList<Edge>();
+	     }
 	     coordX = new int[N];
 	     coordY = new int[N];
 	     for (int v= 0; v < N; v++)
@@ -64,8 +74,19 @@ class Graph{
             }
         return list;
     }
+   
+   
 
-    static Graph example(){
+    public HashMap<Integer, Integer> getTabParent() {
+	return tabParent;
+}
+
+public void setTabParent(int key, int val) {
+	this.tabParent.put(key, val);
+}
+
+
+	static Graph example(){
 	Graph g = new Graph(4);
 	g.setCoordinate(0, 100,100);
 	g.setCoordinate(1, 300,300);
@@ -114,9 +135,55 @@ class Graph{
     	g.addEdge(new Edge(10,11));
     	g.addEdge(new Edge(11,15));
     	g.addEdge(new Edge(10,15));
+    	
 
     	return g;
         }
+    
+    static Graph example3(){
+    	Graph g = new Graph(16);
+    	Graph g2 = new Graph(16);
+    	//g.setCoordinate(0, 50,50);
+    	//g.setCoordinate(1, 50,100);
+    	//g.setCoordinate(2, 50,150);
+    	g2.setCoordinate(3, 50,200);
+    	
+    	//g.setCoordinate(4, 100,50);
+    	//g.setCoordinate(5, 100,100);
+    	g2.setCoordinate(6, 100,150);
+    	g2.setCoordinate(7, 100,200);
+
+    	//g.setCoordinate(8, 150,50);
+    	g2.setCoordinate(9, 150,100);
+    	g2.setCoordinate(10, 150,150);
+    	g2.setCoordinate(11, 150,200);
+    	
+    	//g.setCoordinate(12, 200,50);
+    	//g.setCoordinate(13, 200,100);
+    	//g.setCoordinate(14, 200,150);
+    	g2.setCoordinate(15, 200,200);
+    	
+    	g.addEdge(new Edge(9,10));
+    	g.addEdge(new Edge(9,15));
+    	g.addEdge(new Edge(9,6));
+    	
+    	g.addEdge(new Edge(3,7));
+    	g.addEdge(new Edge(3,6));
+    	g.addEdge(new Edge(6,7));
+    	g.addEdge(new Edge(6,10));
+    	g.addEdge(new Edge(7,11));
+    	g.addEdge(new Edge(10,11));
+    	g.addEdge(new Edge(11,15));
+    	g.addEdge(new Edge(10,15));
+    	
+    	Kruskal k = new Kruskal(g);
+    	k.kruskal();
+    	for( Edge e : k.getListFinal()){
+    		g2.addEdge(e);
+    	}
+    	return g2;
+    	
+    }
 
     static Graph Grid(int n){
 	Graph g = new Graph(n*n);

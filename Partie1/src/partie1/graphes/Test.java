@@ -3,6 +3,8 @@ import java.io.*;
 
 
 import java.util.*;
+
+import partie1.kruskal.Kruskal;
 public class Test{
 
 
@@ -114,13 +116,23 @@ public class Test{
 	int size = 4;
 	//Graph G = Graph.Grid(size);
 	//Graph G = Graph.example();
-	Graph G = Graph.example2();
+	//Graph G = Graph.example2();
+	Graph G = Graph.example3();
+	/*Kruskal k = new Kruskal(G);
+	k.kruskal();
+	k.affichage();
+	
+
+	Graph G2 = Graph.Grid(size);
+	for( Edge e : k.getListFinal()){
+		G2.addEdge(e);
+	}*/
 	Display d = new Display();
 	d.setImage(G.toImage());
-	System.out.println("appuyez sur une touche");
+	/*System.out.println("appuyez sur une touche");
 	new Scanner(System.in).nextLine();
 	d.close();
-	printLaby(G,size, "toto.tex");
+	printLaby(G2,size, "toto.tex");*/
 	
 	
     }

@@ -1,11 +1,16 @@
 package partie1.graphes;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 // edge => est une classe ARRETE
 public class Edge
 {
    int from;
    int to;
    boolean used;
-    Edge(int x, int y)
+   
+    public Edge(int x, int y)
     {
 	this.from = x;
 	this.to = y;
@@ -39,5 +44,9 @@ public class Edge
 
 	public void setUsed(boolean used) {
 		this.used = used;
-	}    
+	}
+	
+	public String toString(){
+		return "From " + from + " To " + to + " Used " + used;
+	}
 }
