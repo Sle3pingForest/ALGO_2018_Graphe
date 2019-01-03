@@ -79,6 +79,44 @@ class Graph{
 	return g;
     }
 
+    static Graph example2(){
+    	Graph g = new Graph(16);
+    	//g.setCoordinate(0, 50,50);
+    	//g.setCoordinate(1, 50,100);
+    	//g.setCoordinate(2, 50,150);
+    	g.setCoordinate(3, 50,200);
+    	
+    	//g.setCoordinate(4, 100,50);
+    	//g.setCoordinate(5, 100,100);
+    	g.setCoordinate(6, 100,150);
+    	g.setCoordinate(7, 100,200);
+
+    	//g.setCoordinate(8, 150,50);
+    	g.setCoordinate(9, 150,100);
+    	g.setCoordinate(10, 150,150);
+    	g.setCoordinate(11, 150,200);
+    	
+    	//g.setCoordinate(12, 200,50);
+    	//g.setCoordinate(13, 200,100);
+    	//g.setCoordinate(14, 200,150);
+    	g.setCoordinate(15, 200,200);
+    	
+    	
+    	g.addEdge(new Edge(9,10));
+    	g.addEdge(new Edge(9,15));
+    	g.addEdge(new Edge(9,6));
+    	
+    	g.addEdge(new Edge(3,7));
+    	g.addEdge(new Edge(3,6));
+    	g.addEdge(new Edge(6,7));
+    	g.addEdge(new Edge(6,10));
+    	g.addEdge(new Edge(7,11));
+    	g.addEdge(new Edge(10,11));
+    	g.addEdge(new Edge(11,15));
+    	g.addEdge(new Edge(10,15));
+
+    	return g;
+        }
 
     static Graph Grid(int n){
 	Graph g = new Graph(n*n);
@@ -147,4 +185,5 @@ class Graph{
 	    {
 	    }                                             
     }    
+    
 }
