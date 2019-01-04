@@ -117,7 +117,7 @@ public class Test{
 	//Graph G = Graph.Grid(size);
 	//Graph G = Graph.example();
 	//Graph G = Graph.example2();
-	Graph G = Graph.example3();
+	Graph G = Graph.example4();
 	/*Kruskal k = new Kruskal(G);
 	k.kruskal();
 	k.affichage();

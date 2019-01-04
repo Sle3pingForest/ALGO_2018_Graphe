@@ -11,6 +11,7 @@ import javax.swing.*;
 
 import partie1.AldousBroder.AldousBroder;
 import partie1.kruskal.Kruskal;
+import partie1.wilson.Wilson;
 
 import java.awt.*;
 import java.awt.image.*;
@@ -68,6 +69,17 @@ public class Graph{
          {
 	     return new ArrayList<Edge>(adj[v]);
          }
+   
+   // recupere larete qui a f et t en from et/ou to
+   public Edge getEdge(int f, int t) {
+	   Edge edge = null;
+	   ArrayList<Edge> le = adj(f);
+	   for (Edge e : le) {
+		   if (  (e.getFrom() == f && e.getTo() == t)  || (e.getFrom() == t && e.getTo() == f)) 
+			   edge = e;
+	   }
+	   return edge;
+   }
 
    public ArrayList<Edge> edges()
     {
@@ -199,6 +211,55 @@ public void setTabParent(int key, int val) {
     	k.kruskal();*/
     	AldousBroder al = new AldousBroder(g);
     	al.albousBroder();
+    	
+    	for( Edge e : al.getListFinal()){
+    		g2.addEdge(e);
+    	}
+    	return g2;
+    	
+    }
+    
+    
+    static Graph example4(){
+    	Graph g = new Graph(16);
+    	Graph g2 = new Graph(16);
+    	//g.setCoordinate(0, 50,50);
+    	//g.setCoordinate(1, 50,100);
+    	//g.setCoordinate(2, 50,150);
+    	g2.setCoordinate(3, 50,200);
+    	
+    	//g.setCoordinate(4, 100,50);
+    	//g.setCoordinate(5, 100,100);
+    	g2.setCoordinate(6, 100,150);
+    	g2.setCoordinate(7, 100,200);
+
+    	//g.setCoordinate(8, 150,50);
+    	g2.setCoordinate(9, 150,100);
+    	g2.setCoordinate(10, 150,150);
+    	g2.setCoordinate(11, 150,200);
+    	
+    	//g.setCoordinate(12, 200,50);
+    	//g.setCoordinate(13, 200,100);
+    	//g.setCoordinate(14, 200,150);
+    	g2.setCoordinate(15, 200,200);
+    	
+    	g.addEdge(new Edge(9,10));
+    	g.addEdge(new Edge(9,15));
+    	g.addEdge(new Edge(9,6));
+    	
+    	g.addEdge(new Edge(3,7));
+    	g.addEdge(new Edge(3,6));
+    	g.addEdge(new Edge(6,7));
+    	g.addEdge(new Edge(6,10));
+    	g.addEdge(new Edge(7,11));
+    	g.addEdge(new Edge(10,11));
+    	g.addEdge(new Edge(11,15));
+    	g.addEdge(new Edge(10,15));
+    	
+    	/*Kruskal k = new Kruskal(g);
+    	k.kruskal();*/
+    	Wilson al = new Wilson(g);
+    	al.wilson();
     	
     	for( Edge e : al.getListFinal()){
     		g2.addEdge(e);
