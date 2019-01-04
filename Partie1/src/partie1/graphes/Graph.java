@@ -23,12 +23,14 @@ public class Graph{
    protected HashMap<Integer,Integer> tabParent;
    protected HashMap<Integer,Boolean> tabVisited;
    private int E;
+   public static ArrayList<Edge> listCouvrant;
 
    @SuppressWarnings("unchecked")
    public Graph(int N)
          {
 	   this.tabParent = new HashMap<>();
 	   this.tabVisited = new HashMap<>();
+	   listCouvrant = new ArrayList<>();
 	     this.V = N;
 	     this.E = 0;
 	     adj = (ArrayList<Edge>[]) new ArrayList[N];
@@ -206,9 +208,22 @@ public void setTabParent(int key, int val) {
     	return g2;
     	
     }
+    
+    public static void algoKrusKal(Graph graph){
+    	Kruskal k = new Kruskal(graph);
+    	k.kruskal();
+    	listCouvrant = k.getListFinal();
+    }
+    
+    public static void algoAlbousBroder(Graph graph ){
+    	AldousBroder ab = new AldousBroder(graph);
+    	ab.albousBroder();
+    	listCouvrant = ab.getListFinal();
+    }
 
     static Graph Grid(int n){
 	Graph g = new Graph(n*n);
+	Graph g2 = new Graph(n*n);
 	int i,j;
 	for (i = 0 ; i < n; i ++) 
 	    for (j = 0 ; j < n; j ++) 
@@ -221,6 +236,13 @@ public void setTabParent(int key, int val) {
 		if (j < n-1) 
 		    g.addEdge(new Edge(n*i+j,n*i+j+1));
 	    }
+	//algoKrusKal(g);
+	//algoAlbousBroder(g);
+	
+	/*for( Edge e : listCouvrant){
+		g2.addEdge(e);
+	}
+	System.out.println(g2.edges().size());*/
 	return g;
     }
     

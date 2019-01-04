@@ -36,7 +36,6 @@ public class AldousBroder {
 
 	public void choixChemin(){
 		//on stock tous les sommets relier a sommetInit dans une arrayliste;
-		System.err.println("SOMMET DEPART " + sommetInit + "\n");
 		ArrayList<Edge> list = this.g.adj(sommetInit);
 		int taille = list.size();
 		Random r = new Random();
@@ -48,12 +47,8 @@ public class AldousBroder {
 
 		this.g.getTabVisited().put(sommetInit, true);
 		this.g.adj(sommetInit).get(valeur).setUsed(true);
-		System.err.println("sommet a visite" + to);
 		if(!this.g.getTabVisited().get(to)){
 			listFinal.add(list.get(valeur));
-		}
-		else{
-			System.err.println("SOMMET DEJA VISITE " + to);
 		}
 		if (this.sommetInit == this.g.adj(sommetInit).get(valeur).getTo())
 			this.sommetInit = this.g.adj(sommetInit).get(valeur).getFrom(); 
@@ -76,7 +71,6 @@ public class AldousBroder {
 			boolean cont = true;
 			while(it.hasNext() && cont){
 				Map.Entry me = (Map.Entry)it.next();
-			     System.out.println("Key is: "+me.getKey() + " & " + " value is: "+me.getValue());
 			       if(!(boolean) me.getValue()){
 			    	   estTotal = false;
 			    	   cont = false;
