@@ -3,8 +3,6 @@ import java.io.*;
 
 
 import java.util.*;
-
-import partie1.kruskal.Kruskal;
 public class Test{
 
 
@@ -72,7 +70,8 @@ public class Test{
 			writer.println(String.format(Locale.US, "\\begin{scope}[xshift=%dcm, yshift=%dcm]", i , j));
 			if (e.to == e.from + size){
 			    /* arête verticale */
-			    if (!e.used)
+				
+			    if (!e.isUsed())
 				{
 				    writer.println("\\draw (0.4,0.9) -- (0.6,0.9);");
 				    writer.println("\\draw (0.4,1.1) -- (0.6,1.1);");			    			    
@@ -86,7 +85,7 @@ public class Test{
 			else{
 			    /* arête horizontale */
 			    
-			    if (!e.used)
+			    if (!e.isUsed())
 				{
 				    writer.println("\\draw (0.9,0.4) -- (0.9,0.6);");
 				    writer.println("\\draw (1.1,0.4) -- (1.1,0.6);");			    			    
@@ -117,7 +116,7 @@ public class Test{
 	//Graph G = Graph.Grid(size);
 	//Graph G = Graph.example();
 	//Graph G = Graph.example2();
-	Graph G = Graph.example4();
+	Graph G2 = Graph.example4();
 	/*Kruskal k = new Kruskal(G);
 	k.kruskal();
 	k.affichage();
@@ -127,12 +126,14 @@ public class Test{
 	for( Edge e : k.getListFinal()){
 		G2.addEdge(e);
 	}*/
+	Graph G = Graph.Grid(size);
+
 	Display d = new Display();
 	d.setImage(G.toImage());
-	/*System.out.println("appuyez sur une touche");
+	System.out.println("appuyez sur une touche");
 	new Scanner(System.in).nextLine();
 	d.close();
-	printLaby(G2,size, "toto.tex");*/
+	printLaby(G,size, "toto.tex");
 	
 	
 	

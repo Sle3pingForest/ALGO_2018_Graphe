@@ -33,6 +33,7 @@ public class Kruskal {
 		for( Edge e : listInit){
 			if(find(e.getFrom()) != find(e.getTo())){
 				this.listFinal.add(e);
+				e.setUsed(true);
 				this.g.getTabParent().put(find(e.getFrom()), find(e.getTo()));
 			}
 		}
