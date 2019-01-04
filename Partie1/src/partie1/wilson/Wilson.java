@@ -141,6 +141,7 @@ public class Wilson {
 					listVisite.add(k);
 					listVisite.add(l);
 					listFinal.add(g.getEdge(k, l));
+					g.getEdge(k, l).setUsed(true);
 					//System.out.println(g.getEdge(k, l));
 				}
 				//System.out.println();
