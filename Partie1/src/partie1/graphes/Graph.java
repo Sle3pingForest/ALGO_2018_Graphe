@@ -279,6 +279,12 @@ public void setTabParent(int key, int val) {
     	ab.albousBroder();
     	listCouvrant = ab.getListFinal();
     }
+    
+    public static void algoWilson(Graph graph ){
+    	Wilson al = new Wilson(graph);
+    	al.wilson();
+    	listCouvrant = al.getListFinal();
+    }
 
     static Graph Grid(int n){
 	Graph g = new Graph(n*n);
@@ -295,13 +301,12 @@ public void setTabParent(int key, int val) {
 		if (j < n-1) 
 		    g.addEdge(new Edge(n*i+j,n*i+j+1));
 	    }
-	//algoKrusKal(g);
+	algoKrusKal(g);
 	//algoAlbousBroder(g);
 	
-	/*for( Edge e : listCouvrant){
+	for( Edge e : g.edges()){
 		g2.addEdge(e);
 	}
-	System.out.println(g2.edges().size());*/
 	return g;
     }
     
