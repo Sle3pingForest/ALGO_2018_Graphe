@@ -17,6 +17,11 @@ import java.awt.*;
 import java.awt.image.*;
 
 public class Graph{
+
+
+    static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    public static double width = screenSize.getWidth();
+    public static double height = screenSize.getHeight();
 	private ArrayList<Edge>[] adj;
 	private int[] coordX;
 	private int[] coordY;
@@ -161,8 +166,6 @@ public class Graph{
 		return g2;
 	}
 	
-	
-
 	static Graph example3(){
 		Graph g = new Graph(4);
 		Graph g2 = new Graph(4);
@@ -183,140 +186,7 @@ public class Graph{
 		return g2;
 	}
 
-	/*static Graph example2(){
-		Graph g = new Graph(16);
-		//g.setCoordinate(0, 50,50);
-		//g.setCoordinate(1, 50,100);
-		//g.setCoordinate(2, 50,150);
-		g.setCoordinate(3, 50,200);
-
-		//g.setCoordinate(4, 100,50);
-		//g.setCoordinate(5, 100,100);
-		g.setCoordinate(6, 100,150);
-		g.setCoordinate(7, 100,200);
-
-		//g.setCoordinate(8, 150,50);
-		g.setCoordinate(9, 150,100);
-		g.setCoordinate(10, 150,150);
-		g.setCoordinate(11, 150,200);
-
-		//g.setCoordinate(12, 200,50);
-		//g.setCoordinate(13, 200,100);
-		//g.setCoordinate(14, 200,150);
-		g.setCoordinate(15, 200,200);
-
-
-		g.addEdge(new Edge(9,10));
-		g.addEdge(new Edge(9,15));
-		g.addEdge(new Edge(9,6));
-
-		g.addEdge(new Edge(3,7));
-		g.addEdge(new Edge(3,6));
-		g.addEdge(new Edge(6,7));
-		g.addEdge(new Edge(6,10));
-		g.addEdge(new Edge(7,11));
-		g.addEdge(new Edge(10,11));
-		g.addEdge(new Edge(11,15));
-		g.addEdge(new Edge(10,15));
-
-
-		return g;
-	}
-
-	static Graph example3(){
-		Graph g = new Graph(16);
-		Graph g2 = new Graph(16);
-		//g.setCoordinate(0, 50,50);
-		//g.setCoordinate(1, 50,100);
-		//g.setCoordinate(2, 50,150);
-		g2.setCoordinate(3, 50,200);
-
-		//g.setCoordinate(4, 100,50);
-		//g.setCoordinate(5, 100,100);
-		g2.setCoordinate(6, 100,150);
-		g2.setCoordinate(7, 100,200);
-
-		//g.setCoordinate(8, 150,50);
-		g2.setCoordinate(9, 150,100);
-		g2.setCoordinate(10, 150,150);
-		g2.setCoordinate(11, 150,200);
-
-		//g.setCoordinate(12, 200,50);
-		//g.setCoordinate(13, 200,100);
-		//g.setCoordinate(14, 200,150);
-		g2.setCoordinate(15, 200,200);
-
-		g.addEdge(new Edge(9,10));
-		g.addEdge(new Edge(9,15));
-		g.addEdge(new Edge(9,6));
-
-		g.addEdge(new Edge(3,7));
-		g.addEdge(new Edge(3,6));
-		g.addEdge(new Edge(6,7));
-		g.addEdge(new Edge(6,10));
-		g.addEdge(new Edge(7,11));
-		g.addEdge(new Edge(10,11));
-		g.addEdge(new Edge(11,15));
-		g.addEdge(new Edge(10,15));
-
-		Kruskal k = new Kruskal(g);
-    	k.kruskal();
-		AldousBroder al = new AldousBroder(g);
-		al.albousBroder();
-
-		for( Edge e : al.getListFinal()){
-			g2.addEdge(e);
-		}
-		return g2;
-
-	}
-*/
-	static Graph example4(){
-		Graph g = new Graph(16);
-		Graph g2 = new Graph(16);
-		//g.setCoordinate(0, 50,50);
-		//g.setCoordinate(1, 50,100);
-		//g.setCoordinate(2, 50,150);
-		g2.setCoordinate(3, 50,200);
-
-		//g.setCoordinate(4, 100,50);
-		//g.setCoordinate(5, 100,100);
-		g2.setCoordinate(6, 100,150);
-		g2.setCoordinate(7, 100,200);
-
-		//g.setCoordinate(8, 150,50);
-		g2.setCoordinate(9, 150,100);
-		g2.setCoordinate(10, 150,150);
-		g2.setCoordinate(11, 150,200);
-
-		//g.setCoordinate(12, 200,50);
-		//g.setCoordinate(13, 200,100);
-		//g.setCoordinate(14, 200,150);
-		g2.setCoordinate(15, 200,200);
-
-		g.addEdge(new Edge(9,10));
-		g.addEdge(new Edge(9,15));
-		g.addEdge(new Edge(9,6));
-
-		g.addEdge(new Edge(3,7));
-		g.addEdge(new Edge(3,6));
-		g.addEdge(new Edge(6,7));
-		g.addEdge(new Edge(6,10));
-		g.addEdge(new Edge(7,11));
-		g.addEdge(new Edge(10,11));
-		g.addEdge(new Edge(11,15));
-		g.addEdge(new Edge(10,15));
-
-		/*Kruskal k = new Kruskal(g);
-    	k.kruskal();*/
-		Wilson al = new Wilson(g);
-		al.wilson();
-
-		for( Edge e : al.getListFinal()){
-			g2.addEdge(e);
-		}
-		return g2;
-	}
+	
 
 	public static void algoKrusKal(Graph graph){
 		Kruskal k = new Kruskal(graph);
@@ -336,13 +206,13 @@ public class Graph{
 		listCouvrant = al.getListFinal();
 	}
 
-	static Graph Grid(int n){
+	static Graph Grid(int n,int choixAlgo){
 		Graph g = new Graph(n*n);
 		Graph g2 = new Graph(n*n);
 		int i,j;
 		for (i = 0 ; i < n; i ++) 
 			for (j = 0 ; j < n; j ++) 
-				g.setCoordinate(n*i+j, 50+(300*i)/n,50+(300*j)/n);
+				g2.setCoordinate(n*i+j, 50+((int)width*i)/n,50+((int)height*j)/n);
 
 		for (i = 0 ; i < n; i ++) 
 			for (j = 0 ; j < n; j ++){
@@ -351,21 +221,28 @@ public class Graph{
 				if (j < n-1) 
 					g.addEdge(new Edge(n*i+j,n*i+j+1));
 			}
-		//algoKrusKal(g);
-		//algoAlbousBroder(g);
-		algoWilson(g );
+		if(choixAlgo == 1) {
+			algoKrusKal(g);
+		}
+		else if(choixAlgo == 2) {
+			algoAlbousBroder(g);
+		}
+		else if (choixAlgo == 3) {
+			algoWilson(g );
+		}
 		for( Edge e : g.edges()){
 			g2.addEdge(e);
 		}
-		return g;
+		return g2;
 	}
 
 
 	public BufferedImage toImage(){
-		BufferedImage image = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
+        
+		BufferedImage image = new BufferedImage((int)width,(int) height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2d = image.createGraphics();
 		g2d.setBackground(Color.WHITE);
-		g2d.fillRect(0, 0, 400, 400);
+		g2d.fillRect(0, 0, (int)width, (int)height);
 		g2d.setColor(Color.BLACK);
 		BasicStroke bs = new BasicStroke(2);
 		g2d.setStroke(bs);
