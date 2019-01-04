@@ -132,7 +132,7 @@ public class Test{
 	d.setImage(G.toImage());
 	System.out.println("appuyez sur une touche");
 	new Scanner(System.in).nextLine();
-	d.close();
+	//d.close();
 	printLaby(G,size, "toto.tex");
 	
 	

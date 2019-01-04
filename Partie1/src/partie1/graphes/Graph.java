@@ -301,9 +301,9 @@ public void setTabParent(int key, int val) {
 		if (j < n-1) 
 		    g.addEdge(new Edge(n*i+j,n*i+j+1));
 	    }
-	algoKrusKal(g);
+	//algoKrusKal(g);
 	//algoAlbousBroder(g);
-	
+	algoWilson(g );
 	for( Edge e : g.edges()){
 		g2.addEdge(e);
 	}

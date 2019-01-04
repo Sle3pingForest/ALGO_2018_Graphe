@@ -46,9 +46,9 @@ public class AldousBroder {
 			
 
 		this.g.getTabVisited().put(sommetInit, true);
-		this.g.adj(sommetInit).get(valeur).setUsed(true);
 		if(!this.g.getTabVisited().get(to)){
 			listFinal.add(list.get(valeur));
+			this.g.adj(sommetInit).get(valeur).setUsed(true);
 		}
 		if (this.sommetInit == this.g.adj(sommetInit).get(valeur).getTo())
 			this.sommetInit = this.g.adj(sommetInit).get(valeur).getFrom(); 
