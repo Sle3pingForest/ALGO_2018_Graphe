@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import com.sun.org.apache.xpath.internal.axes.HasPositionalPredChecker;
+
 import partie1.graphes.Edge;
 import partie1.graphes.Graph;
 
