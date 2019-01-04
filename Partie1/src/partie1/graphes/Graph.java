@@ -3,10 +3,13 @@ package partie1.graphes;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 import java.io.*;
 import javax.swing.*;
 
+import partie1.AldousBroder.AldousBroder;
 import partie1.kruskal.Kruskal;
 
 import java.awt.*;
@@ -18,12 +21,14 @@ public class Graph{
    private int[] coordY;
    private final int V;
    protected HashMap<Integer,Integer> tabParent;
+   protected HashMap<Integer,Boolean> tabVisited;
    private int E;
 
    @SuppressWarnings("unchecked")
    public Graph(int N)
          {
 	   this.tabParent = new HashMap<>();
+	   this.tabVisited = new HashMap<>();
 	     this.V = N;
 	     this.E = 0;
 	     adj = (ArrayList<Edge>[]) new ArrayList[N];
@@ -75,7 +80,13 @@ public class Graph{
         return list;
     }
    
-   
+   public HashMap<Integer, Boolean>  getsommetUse(){
+		for(Edge e : edges()){
+			tabVisited.put(e.getFrom(),false);
+			tabVisited.put(e.getTo(), false);
+		}
+		return tabVisited;
+	}
 
     public HashMap<Integer, Integer> getTabParent() {
 	return tabParent;
@@ -85,6 +96,14 @@ public void setTabParent(int key, int val) {
 	this.tabParent.put(key, val);
 }
 
+	public HashMap<Integer, Boolean> getTabVisited() {
+	return tabVisited;
+}
+
+	public void setTabVisited(HashMap<Integer, Boolean> tabVisited) {
+		
+		this.tabVisited = tabVisited;
+	}
 
 	static Graph example(){
 	Graph g = new Graph(4);
@@ -176,9 +195,12 @@ public void setTabParent(int key, int val) {
     	g.addEdge(new Edge(11,15));
     	g.addEdge(new Edge(10,15));
     	
-    	Kruskal k = new Kruskal(g);
-    	k.kruskal();
-    	for( Edge e : k.getListFinal()){
+    	/*Kruskal k = new Kruskal(g);
+    	k.kruskal();*/
+    	AldousBroder al = new AldousBroder(g);
+    	al.albousBroder();
+    	
+    	for( Edge e : al.getListFinal()){
     		g2.addEdge(e);
     	}
     	return g2;
