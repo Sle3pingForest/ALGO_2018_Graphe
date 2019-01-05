@@ -420,6 +420,7 @@ public class Test{
 
 	public static void main(String[] args) {
 		
+		/*
 		int size = 20;
 		int choixAlgo = 3; // 1 = kruskal , 2 = albousbroder , 3 = wilson
 		Graph G = Graph.Grid(size,choixAlgo);
@@ -431,7 +432,7 @@ public class Test{
 		printLaby(G,size, "toto.tex");
 
 		d.close();
-		
+		*/
 		/*
 		/*int [] tab = new int[8];
 		//tab = testKruskal();
