@@ -112,9 +112,6 @@ public class Test{
 			{
 			}                                             
 		}    
-
-
-
 	}	
 
 	public static int[] testKruskal(){
@@ -422,22 +419,24 @@ public class Test{
 	}
 
 	public static void main(String[] args) {
-		int size = 5;
-		//Graph G = Graph.Grid(size);
-		//Graph G = Graph.example();
-		//Graph G = Graph.example2();
-		//Graph G2 = Graph.example4();
+		
+		int size = 20;
+		int choixAlgo = 3; // 1 = kruskal , 2 = albousbroder , 3 = wilson
+		Graph G = Graph.Grid(size,choixAlgo);
+		Display d = new Display();
+		d.setImage(G.toImage());
+		System.out.println("appuyez sur une touche");
+		new Scanner(System.in).nextLine();
+		//d.close();
+		printLaby(G,size, "toto.tex");
+
+		d.close();
+		
 		/*
-		Graph G = Graph.GridSansAlgo(size);
-		Wilson w = new Wilson(G);
-		w.wilson();
-		System.out.println(sortieLabyrinthe(G, size) );
-		*/
-		/*
-		int [] tab = new int[8];
+		/*int [] tab = new int[8];
 		//tab = testKruskal();
 		//tab = testAldousBroder();
-		tab = testWilson();
+		//tab = testWilson();
 		for(int i = 0 ; i < 8 ; i ++){
 			System.out.println("cas " + i  + "  nb de fois " + (double)tab[i]/10000 + "%");
 		}
@@ -446,15 +445,14 @@ public class Test{
 		System.out.println(" WILSON   " + testCulDeSac(1));
 		
 		System.out.println(" KRUSKAL  " + testCulDeSac(2));
-/*
-		Display d = new Display();
-		d.setImage(G.toImage());
-		System.out.println("appuyez sur une touche");
-		new Scanner(System.in).nextLine();
-		//d.close();
-		printLaby(G,size, "toto.tex");
 
-*/
+		/*
+		Graph G = Graph.GridSansAlgo(size);
+		Wilson w = new Wilson(G);
+		w.wilson();
+		System.out.println(sortieLabyrinthe(G, size) );
+		*/
+
 
 	}
 } 

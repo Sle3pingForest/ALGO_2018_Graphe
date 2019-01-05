@@ -1,6 +1,7 @@
 package partie1.graphes;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 public class Display extends JFrame {
@@ -8,10 +9,13 @@ public class Display extends JFrame {
     boolean visible;
     public  Display() {
         super("Image");       // Titre de la fenêtre
-        setPreferredSize(new Dimension(400, 500));  // largeur, hauteur
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
+        setPreferredSize(new Dimension((int)width,(int)height));  // largeur, hauteur
 
         jlabel = new JLabel();
-	visible = false;
+        visible = false;
         this.add(jlabel, BorderLayout.CENTER);
         this.pack();
     }
