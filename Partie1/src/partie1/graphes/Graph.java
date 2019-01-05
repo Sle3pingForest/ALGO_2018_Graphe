@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.io.*;
 import javax.swing.*;
@@ -71,6 +72,8 @@ public class Graph{
 	{
 		return new ArrayList<Edge>(adj[v]);
 	}
+	
+	
 
 	// recupere larete qui a f et t en from et/ou to
 	public Edge getEdge(int f, int t) {
@@ -118,6 +121,10 @@ public class Graph{
 
 		this.tabVisited = tabVisited;
 	}
+	
+	
+	
+	
 
 	static Graph example(){
 		Graph g = new Graph(4);
@@ -353,10 +360,28 @@ public class Graph{
 			}
 		//algoKrusKal(g);
 		//algoAlbousBroder(g);
-		algoWilson(g );
+		algoWilson(g);
 		for( Edge e : g.edges()){
 			g2.addEdge(e);
 		}
+		return g;
+	}
+	
+	static Graph GridSansAlgo(int n){
+		Graph g = new Graph(n*n);
+		Graph g2 = new Graph(n*n);
+		int i,j;
+		for (i = 0 ; i < n; i ++) 
+			for (j = 0 ; j < n; j ++) 
+				g.setCoordinate(n*i+j, 50+(300*i)/n,50+(300*j)/n);
+
+		for (i = 0 ; i < n; i ++) 
+			for (j = 0 ; j < n; j ++){
+				if (i < n-1) 
+					g.addEdge(new Edge(n*i+j,n*(i+1)+j));
+				if (j < n-1) 
+					g.addEdge(new Edge(n*i+j,n*i+j+1));
+			}
 		return g;
 	}
 
