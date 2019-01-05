@@ -21,8 +21,8 @@ public class Graph{
 
 
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    public static double width = screenSize.getWidth();
-    public static double height = screenSize.getHeight();
+    public static double width = 800;//screenSize.getWidth();
+    public static double height =800;// screenSize.getHeight();
 	private ArrayList<Edge>[] adj;
 	private int[] coordX;
 	private int[] coordY;
@@ -249,7 +249,7 @@ public class Graph{
 		int i,j;
 		for (i = 0 ; i < n; i ++) 
 			for (j = 0 ; j < n; j ++) 
-				g.setCoordinate(n*i+j, 50+(300*i)/n,50+(300*j)/n);
+				g.setCoordinate(n*i+j, 50+(150*i)/n,50+(150*j)/n);
 
 		for (i = 0 ; i < n; i ++) 
 			for (j = 0 ; j < n; j ++){
@@ -299,27 +299,67 @@ public class Graph{
 	public int cheminSortie(){
 		ArrayList<Edge> sortie = new ArrayList<>();
 		sortie = listCouvrant;
+
 		int sort = V - (int)Math.sqrt(V) ;
 		int entre =  (int)Math.sqrt(V) - 1;
-		System.out.println(sort + " " + entre);
 		boolean sup = true;
 		int k = 0;
-		while( k < 5){
+		while(sup){
 			sup = false;
 			for(int i = 0 ; i < V ; i++) {
-				System.out.println(adj(i));
 				if(adj(i).size() == 1 && 
 				adj(i).get(0).getFrom() !=  sort && adj(i).get(0).getFrom() != entre &&
 				adj(i).get(0).getTo() !=  sort && adj(i).get(0).getTo() != entre ) {
+
+					int to =  adj(i).get(0).getFrom();
+					if (adj(i).get(0).getFrom() == i) {
+						to = adj(i).get(0).getTo();
+					}
+					adj(i).get(0).setUsed(false);
 					sortie.remove(adj(i).get(0));
-					//System.out.println(adj(i));
+					
+					adj[i].remove(0);
+					
+					for (int m = 0; m < adj[to].size(); m++) {
+						if (adj[to].get(m).getFrom() == i || adj[to].get(m).getTo() == i ) {
+							adj(to).get(m).setUsed(false);
+							sortie.remove(adj[to].get(m));
+							adj[to].remove(m);
+							
+						}
+					}
 					sup = true;
 				}
 			}
 			k++;
-			System.err.println(sup);
 		}
-		listCouvrant = sortie;
+		
+		int[] tab = {entre, sort};
+		
+		for (int i =0; i< tab.length; i++) {
+			for(Edge e : adj(tab[i])) {
+				
+				int areteSuppr = e.getFrom();
+				if (e.getFrom() == tab[i]) areteSuppr = e.getTo();
+				if (adj(areteSuppr).size() == 1) {
+					
+					adj(areteSuppr).get(0).setUsed(false);
+					sortie.remove(adj(areteSuppr).get(0));
+					adj[areteSuppr].remove(0);
+					
+					int suppr = tab[i];
+					for (int m = 0; m < adj[suppr].size(); m++) {
+						if (adj[suppr].get(m).getFrom() == areteSuppr || adj[suppr].get(m).getTo() == areteSuppr ) {
+							adj(suppr).get(m).setUsed(false);
+							sortie.remove(adj[suppr].get(m));
+							adj[suppr].remove(m);
+							
+						}
+					}
+					
+				}
+			}
+		}
 		return sortie.size();
 	}
 

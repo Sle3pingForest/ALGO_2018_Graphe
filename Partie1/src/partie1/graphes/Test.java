@@ -200,28 +200,28 @@ public class Test{
 		return tabProba;
 	}
 	
+	public static double testCheminSortie(int methode) {
+		int j = 0;
+		double i = 0;
+		int boucle = 1000;
+		int taille = 20;
+		while(j < boucle){
+			Graph g = Graph.Grid(taille, methode);
+			
+			i += g.cheminSortie();
+			//System.out.println(i);
+			j++;
+		}
+		return i / boucle;
+	}
+	
 	public static double testCulDeSac(int methode) {
 		int j = 0;
 		double i = 0;
 		int boucle = 1000;
 		int taille = 20;
 		while(j < boucle){
-			Graph g = Graph.GridSansAlgo(taille);
-			
-			switch(methode) {
-			case 1:
-				Wilson w = new Wilson(g);
-				w.wilson();
-				break;
-			case 2:
-				Kruskal k = new Kruskal(g);
-				k.kruskal();
-				break;
-			case 3:
-				AldousBroder a = new AldousBroder(g);
-				a.albousBroder();
-				break;
-			}
+			Graph g = Graph.Grid(taille,methode);
 			i += culDeSac(g, taille);
 			//System.out.println(i);
 			j++;
@@ -420,9 +420,9 @@ public class Test{
 
 	public static void main(String[] args) {
 		
-		
+		/*
 		int size = 5;
-		int choixAlgo = 2; // 1 = kruskal , 2 = albousbroder , 3 = wilson
+		int choixAlgo = 3; // 1 = kruskal , 2 = albousbroder , 3 = wilson
 		Graph G = Graph.Grid(size,choixAlgo);
 		G.cheminSortie();
 		Display d = new Display();
@@ -433,7 +433,7 @@ public class Test{
 		printLaby(G,size, "toto.tex");
 
 		d.close();
-		
+		*/
 		/*
 		/*int [] tab = new int[8];
 		//tab = testKruskal();
@@ -444,9 +444,26 @@ public class Test{
 		}
 		*/
 		
-		//System.out.println(" WILSON   " + testCulDeSac(1));
+		long debut = System.currentTimeMillis();
+		System.out.println("  KRUSKAL " + testCulDeSac(1 ) + "  nb cul de sac  Temps d execution: " + (long)(System.currentTimeMillis()-debut)/1000.0 + " secondes" );
 		
-		//System.out.println(" KRUSKAL  " + testCulDeSac(2));
+		debut = System.currentTimeMillis();
+		System.out.println(" AlbousBroder  " + testCulDeSac(2 )  + "  nb cul de sac  Temps d execution: " + (long)(System.currentTimeMillis()-debut)/1000.0 + " secondes" );
+		
+		debut = System.currentTimeMillis();
+		System.out.println(" WILSON   " + testCulDeSac(3 )  + " nb cul de sac   Temps d execution: " + (long)(System.currentTimeMillis()-debut)/1000.0 + " secondes");
+
+		
+		System.out.println();
+		
+		debut = System.currentTimeMillis();
+		System.out.println(" KRUSKAL  " + testCheminSortie(1) + "  distance entree/sortie  Temps d execution: " + (long)(System.currentTimeMillis()-debut)/1000.0 + " secondes" );
+		
+		debut = System.currentTimeMillis();
+		System.out.println(" AlbousBroder  " + testCheminSortie(2) + "  distance entree/sortie   Temps d execution: " + (long)(System.currentTimeMillis()-debut)/1000.0 + " secondes" );
+		
+		debut = System.currentTimeMillis();
+		System.out.println(" WILSON  " + testCheminSortie(3) + " distance entree/sortie    Temps d execution: " + (long)(System.currentTimeMillis()-debut)/1000.0 + " secondes");
 
 		/*
 		Graph G = Graph.GridSansAlgo(size);

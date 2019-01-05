@@ -62,6 +62,8 @@ public class Wilson {
 
 		sommetInitRandom = this.g.edges().get(0).getTo();
 	}
+	
+
 
 	public boolean choixSommetNonVisite() {
 		boolean reste = false;
@@ -74,6 +76,10 @@ public class Wilson {
 			sommetInitRandom = listNonVisite.get(valeur);
 		}
 		return reste;
+	}
+	
+	public void setSommetInitRandom(int i) {
+		sommetInitRandom = i;
 	}
 
 	// supprime de la listeNonVisite le sommet de valeur i
@@ -148,20 +154,23 @@ public class Wilson {
 				for (Integer i : listVisite) {
 					if (listNonVisite.contains(i)) supprSommetNonVisite(i);
 				}
-				
-				// On reset les list car on va faire un nouveau
-				// tour de marche aleatoire
-				resetListMemoire();
-				resetListSommet();
-				
 				// on choisit un nouveau sommet non visite
 				// s'il n y a plus de sommet non visite on sarrete
-				if (!choixSommetNonVisite() ) estTotal = true;
+				if (!choixSommetNonVisite() )  {
+					estTotal = true;
+				} else {
+					// On reset les list car on va faire un nouveau
+					// tour de marche aleatoire
+					resetListMemoire();
+					resetListSommet();
+				}
 			}
 
 
 		}
 	}
+	
+	
 
 
 	// supprime les boucles et garde les sommets non duplique dans la listSommet
@@ -224,6 +233,9 @@ public class Wilson {
 		listSommet = new ArrayList<>();
 	}
 
+	public  ArrayList<Integer> getListSommet() {
+		return listSommet;
+	}
 
 	public ArrayList<Edge> getListFinal() {
 		return listFinal;
@@ -243,6 +255,123 @@ public class Wilson {
 		}
 		System.out.println();
 	}
+
+	
+	
+	// -------------------------------------------- PARTIE LABYRINTHE ------------------------------------------------------------ //
+	
+	
+	public void wilson(int somm, int depart){
+
+		boolean estTotal = false;
+		choixSommetInit(somm);
+
+		int m = 0;
+		boolean arret = choixChemin(depart);
+		while(!estTotal){
+
+			if (m != 0) arret = choixChemin();
+			// si on a rencontre un sommet deja visite
+			if (arret) {
+				// on supprime les boucles
+				supprDuplicat();
+
+				// on ajoute les sommets dans la liste visite 
+				// et on les enleve de la liste non visite 
+				//System.out.println(" AJOUT EDGE  \n " + listSommet);
+				for (int i = 0; i < listSommet.size() -1; i++) {
+					int k = listSommet.get(i);
+					int l = listSommet.get(i+1);
+					listVisite.add(k);
+					listVisite.add(l);
+					listFinal.add(g.getEdge(k, l));
+					g.getEdge(k, l).setUsed(true);
+					//System.out.println(g.getEdge(k, l));
+				}
+				//System.out.println();
+				for (Integer i : listVisite) {
+					if (listNonVisite.contains(i)) supprSommetNonVisite(i);
+				}
+				// on choisit un nouveau sommet non visite
+				// s'il n y a plus de sommet non visite on sarrete
+				if ( sommetInitRandom == sommetInit )  {
+					estTotal = true;
+				} else {
+					// On reset les list car on va faire un nouveau
+					// tour de marche aleatoire
+					resetListMemoire();
+					resetListSommet();
+				}
+			}
+			m++;
+		}
+	}
+	
+	
+	public void choixSommetInit(int i){
+		sommetInit = i;
+		this.listVisite.add(sommetInit);
+		supprSommetNonVisite(sommetInit);
+		
+		sommetInitRandom = this.g.edges().get(0).getTo();
+	}
+
+	
+	public boolean choixChemin(int i){
+		sommetInitRandom = i;
+		boolean sommetVisite = false;
+		ArrayList<Edge> list = this.g.adj(sommetInitRandom);
+		listSommet.add(sommetInitRandom);
+		listMemoire.get(sommetInitRandom).add(listSommet.size()-1);
+
+		int taille = list.size();
+		Random r = new Random();
+		int valeur = r.nextInt(taille);
+
+		int to = list.get(valeur).getTo();
+		if (this.sommetInitRandom == list.get(valeur).getTo())
+			to = list.get(valeur).getFrom(); 
+
+
+		if(this.listVisite.contains(to)){
+			listSommet.add(to);
+			sommetVisite = true;
+		}
+		
+		if (this.sommetInitRandom == this.g.adj(sommetInitRandom).get(valeur).getTo())
+			this.sommetInitRandom = this.g.adj(sommetInitRandom).get(valeur).getFrom(); 
+		else 
+			this.sommetInitRandom = this.g.adj(sommetInitRandom).get(valeur).getTo();
+
+		return sommetVisite;
+	}
+	
+	
+
+	public int distanceSortie(int somm, int depart){
+		boolean estTotal = false;
+		choixSommetInit(somm);
+		
+		int longueur = 0;
+		int m = 0;
+		boolean arret = choixChemin(depart);
+		while(!estTotal){
+
+			if (m != 0) arret = choixChemin();
+			
+			if (!listSommet.contains(sommetInitRandom)) longueur++;
+			// si on a rencontre un sommet deja visite
+			if (arret) {
+				if ( sommetInitRandom == sommetInit )  {
+					estTotal = true;
+				}
+			}
+			m++;
+		}
+		System.out.println();
+		return longueur;
+	}
+
 
 
 }
