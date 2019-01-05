@@ -237,7 +237,7 @@ public class Graph{
 		else if (choixAlgo == 3) {
 			algoWilson(g );
 		}
-		for( Edge e : g.edges()){
+		for( Edge e : g.listCouvrant){
 			g2.addEdge(e);
 		}
 		return g2;
@@ -296,6 +296,32 @@ public class Graph{
 		return image;
 	}
 
+	public int cheminSortie(){
+		ArrayList<Edge> sortie = new ArrayList<>();
+		sortie = listCouvrant;
+		int sort = V - (int)Math.sqrt(V) ;
+		int entre =  (int)Math.sqrt(V) - 1;
+		System.out.println(sort + " " + entre);
+		boolean sup = true;
+		int k = 0;
+		while( k < 5){
+			sup = false;
+			for(int i = 0 ; i < V ; i++) {
+				System.out.println(adj(i));
+				if(adj(i).size() == 1 && 
+				adj(i).get(0).getFrom() !=  sort && adj(i).get(0).getFrom() != entre &&
+				adj(i).get(0).getTo() !=  sort && adj(i).get(0).getTo() != entre ) {
+					sortie.remove(adj(i).get(0));
+					//System.out.println(adj(i));
+					sup = true;
+				}
+			}
+			k++;
+			System.err.println(sup);
+		}
+		listCouvrant = sortie;
+		return sortie.size();
+	}
 
 	public void writeFile(String s)
 	{

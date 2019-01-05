@@ -420,10 +420,11 @@ public class Test{
 
 	public static void main(String[] args) {
 		
-		/*
-		int size = 20;
-		int choixAlgo = 3; // 1 = kruskal , 2 = albousbroder , 3 = wilson
+		
+		int size = 5;
+		int choixAlgo = 2; // 1 = kruskal , 2 = albousbroder , 3 = wilson
 		Graph G = Graph.Grid(size,choixAlgo);
+		G.cheminSortie();
 		Display d = new Display();
 		d.setImage(G.toImage());
 		System.out.println("appuyez sur une touche");
@@ -432,7 +433,7 @@ public class Test{
 		printLaby(G,size, "toto.tex");
 
 		d.close();
-		*/
+		
 		/*
 		/*int [] tab = new int[8];
 		//tab = testKruskal();
@@ -443,9 +444,9 @@ public class Test{
 		}
 		*/
 		
-		System.out.println(" WILSON   " + testCulDeSac(1));
+		//System.out.println(" WILSON   " + testCulDeSac(1));
 		
-		System.out.println(" KRUSKAL  " + testCulDeSac(2));
+		//System.out.println(" KRUSKAL  " + testCulDeSac(2));
 
 		/*
 		Graph G = Graph.GridSansAlgo(size);
