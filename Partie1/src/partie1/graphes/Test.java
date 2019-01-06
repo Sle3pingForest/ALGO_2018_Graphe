@@ -207,9 +207,7 @@ public class Test{
 		int taille = 20;
 		while(j < boucle){
 			Graph g = Graph.Grid(taille, methode);
-			
 			i += g.cheminSortie();
-			//System.out.println(i);
 			j++;
 		}
 		return i / boucle;
@@ -223,13 +221,11 @@ public class Test{
 		while(j < boucle){
 			Graph g = Graph.Grid(taille,methode);
 			i += culDeSac(g, taille);
-			//System.out.println(i);
 			j++;
 		}
 		return i / boucle;
 	}
 	
-	//laby
 	public static int culDeSac(Graph g, int taille) {
 		
 		int culDeSac = 0;
@@ -246,36 +242,10 @@ public class Test{
 		return culDeSac;
 	}
 	
-	
-	// calcul la distance entre la sortie et lentree dun labyrinthe 20*20
-		public static int distanceSortie(Graph g) {
 			
-			int longueur = 0;
-			/*
-			Wilson w = new Wilson(g);
-			w.wilson(20, 4);
-			
-			for (Integer i : w.getListSommet()) {
-				System.out.print(i + " - "  );
-			}
-			
-			System.out.println();
-			return w.getListSommet().size();*/
-			//longueur = sortieLabyrinthe(g, );
-			
-			return longueur;
-		}
-		
 		public static int sortieLabyrinthe(Graph g, int taille) {
 		
-			/*
-			int sommetCourant = 4;
-			int sommetInit = 20;
-			ArrayList<Integer> listSommet = new ArrayList<>();
 			
-			Wilson w = new Wilson(g);
-			return w.distanceSortie(20, 4);
-			*/
 			
 			int[][] tab = new int[taille][taille];
 			boolean trouve = false;
@@ -420,29 +390,45 @@ public class Test{
 
 	public static void main(String[] args) {
 		
-		/*
+		
 		int size = 5;
 		int choixAlgo = 3; // 1 = kruskal , 2 = albousbroder , 3 = wilson
 		Graph G = Graph.Grid(size,choixAlgo);
-		G.cheminSortie();
-		Display d = new Display();
-		d.setImage(G.toImage());
-		System.out.println("appuyez sur une touche");
-		new Scanner(System.in).nextLine();
-		//d.close();
-		printLaby(G,size, "toto.tex");
+		
+		/*TEST DE POURCENTAGE*/
+		System.out.println("TEST DE POURCENTAGE*");
+		
+	
+		int [] tabKruskal = new int[8];
+		tabKruskal = testKruskal();
+		
 
-		d.close();
-		*/
-		/*
-		/*int [] tab = new int[8];
-		//tab = testKruskal();
-		//tab = testAldousBroder();
-		//tab = testWilson();
+		System.out.println("\n TEST DE KRUSKAL \n*");
 		for(int i = 0 ; i < 8 ; i ++){
-			System.out.println("cas " + i  + "  nb de fois " + (double)tab[i]/10000 + "%");
+			System.out.println("cas " + i  + "  nb de fois " + (double)tabKruskal[i]/10000 + "%");
 		}
-		*/
+		
+		int [] tabAldousBroder = new int[8];
+		tabAldousBroder= testAldousBroder();
+
+		System.out.println("\n TEST DE ALDOUS-BRODER \n*");
+		for(int i = 0 ; i < 8 ; i ++){
+			System.out.println("cas " + i  + "  nb de fois " + (double)tabAldousBroder[i]/10000 + "%");
+		}
+		
+		int [] tabwilson = new int[8];
+		tabwilson = testWilson();
+
+		System.out.println("\n TEST DE WILSON \n*");
+		for(int i = 0 ; i < 8 ; i ++){
+			System.out.println("cas " + i  + "  nb de fois " + (double)tabwilson[i]/10000 + "%");
+		}
+		
+		
+		/* TEST DE CUL SAC ET CHEMIN SORTIE*/
+
+		
+		System.out.println("\n TEST DE CUL SAC ET CHEMIN SORTIE \n");
 		
 		long debut = System.currentTimeMillis();
 		System.out.println("  KRUSKAL " + testCulDeSac(1 ) + "  nb cul de sac  Temps d execution: " + (long)(System.currentTimeMillis()-debut)/1000.0 + " secondes" );
@@ -465,12 +451,14 @@ public class Test{
 		debut = System.currentTimeMillis();
 		System.out.println(" WILSON  " + testCheminSortie(3) + " distance entree/sortie    Temps d execution: " + (long)(System.currentTimeMillis()-debut)/1000.0 + " secondes");
 
-		/*
-		Graph G = Graph.GridSansAlgo(size);
-		Wilson w = new Wilson(G);
-		w.wilson();
-		System.out.println(sortieLabyrinthe(G, size) );
-		*/
+
+
+		Display d = new Display();
+		d.setImage(G.toImage());
+		System.out.println("appuyez sur une touche");
+		new Scanner(System.in).nextLine();
+		printLaby(G,size, "toto.tex");
+		d.close();
 
 
 	}
